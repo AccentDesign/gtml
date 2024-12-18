@@ -11,10 +11,10 @@ import (
 type (
 	Attrs   templ.Attributes
 	Element struct {
-		Attrs    Attrs
-		Children []*Element
-		Tag      string
-		Text     string
+		Attrs    Attrs      `json:"attrs"`
+		Children []*Element `json:"children"`
+		Tag      string     `json:"tag"`
+		Text     string     `json:"text"`
 	}
 )
 
