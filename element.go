@@ -41,7 +41,7 @@ func Button(attrs Attrs, children ...*Element) *Element {
 }
 
 func BR(attrs Attrs) *Element {
-	return &Element{Tag: "br", Attrs: attrs}
+	return &Element{Tag: "br", Attrs: attrs, Children: []*Element{}}
 }
 
 func Caption(attrs Attrs, children ...*Element) *Element {
@@ -85,15 +85,15 @@ func Header(attrs Attrs, children ...*Element) *Element {
 }
 
 func HR(attrs Attrs) *Element {
-	return &Element{Tag: "hr", Attrs: attrs}
+	return &Element{Tag: "hr", Attrs: attrs, Children: []*Element{}}
 }
 
 func Img(attrs Attrs) *Element {
-	return &Element{Tag: "img", Attrs: attrs}
+	return &Element{Tag: "img", Attrs: attrs, Children: []*Element{}}
 }
 
 func Input(attrs Attrs) *Element {
-	return &Element{Tag: "input", Attrs: attrs}
+	return &Element{Tag: "input", Attrs: attrs, Children: []*Element{}}
 }
 
 func Label(attrs Attrs, children ...*Element) *Element {
@@ -153,7 +153,7 @@ func TD(attrs Attrs, children ...*Element) *Element {
 }
 
 func Text(text string) *Element {
-	return &Element{Text: text}
+	return &Element{Text: text, Children: []*Element{}}
 }
 
 func Textarea(attrs Attrs, children ...*Element) *Element {
