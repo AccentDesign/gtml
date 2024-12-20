@@ -32,8 +32,28 @@ func A(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "a", Attrs: attrs, Children: children}
 }
 
+func Address(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "address", Attrs: attrs, Children: children}
+}
+
+func Article(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "article", Attrs: attrs, Children: children}
+}
+
 func Aside(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "aside", Attrs: attrs, Children: children}
+}
+
+func B(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "b", Attrs: attrs, Children: children}
+}
+
+func Blockquote(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "blockquote", Attrs: attrs, Children: children}
+}
+
+func Body(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "body", Attrs: attrs, Children: children}
 }
 
 func Button(attrs Attrs, children ...*Element) *Element {
@@ -48,12 +68,32 @@ func Caption(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "caption", Attrs: attrs, Children: children}
 }
 
+func DD(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "dd", Attrs: attrs, Children: children}
+}
+
 func Details(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "details", Attrs: attrs, Children: children}
 }
 
+func Dialog(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "dialog", Attrs: attrs, Children: children}
+}
+
 func Div(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "div", Attrs: attrs, Children: children}
+}
+
+func DL(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "dl", Attrs: attrs, Children: children}
+}
+
+func DT(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "dt", Attrs: attrs, Children: children}
+}
+
+func Fieldset(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "fieldset", Attrs: attrs, Children: children}
 }
 
 func Form(attrs Attrs, children ...*Element) *Element {
@@ -88,6 +128,10 @@ func HR(attrs Attrs) *Element {
 	return &Element{Tag: "hr", Attrs: attrs, Children: []*Element{}}
 }
 
+func I(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "i", Attrs: attrs, Children: children}
+}
+
 func Img(attrs Attrs) *Element {
 	return &Element{Tag: "img", Attrs: attrs, Children: []*Element{}}
 }
@@ -98,6 +142,10 @@ func Input(attrs Attrs) *Element {
 
 func Label(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "label", Attrs: attrs, Children: children}
+}
+
+func Legend(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "legend", Attrs: attrs, Children: children}
 }
 
 func LI(attrs Attrs, children ...*Element) *Element {
@@ -116,6 +164,10 @@ func OL(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "ol", Attrs: attrs, Children: children}
 }
 
+func Optgroup(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "optgroup", Attrs: attrs, Children: children}
+}
+
 func Option(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "option", Attrs: attrs, Children: children}
 }
@@ -132,8 +184,16 @@ func Select(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "select", Attrs: attrs, Children: children}
 }
 
+func Small(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "small", Attrs: attrs, Children: children}
+}
+
 func Span(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "span", Attrs: attrs, Children: children}
+}
+
+func Strong(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "strong", Attrs: attrs, Children: children}
 }
 
 func Summary(attrs Attrs, children ...*Element) *Element {
