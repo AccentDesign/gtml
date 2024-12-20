@@ -250,16 +250,12 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 	if e.Tag != "" {
 		b.WriteString("<" + e.Tag)
 
-		if _, err := io.WriteString(w, b.String()); err != nil {
-			return err
-		}
-		b.Reset()
-
 		if len(e.Attrs) > 0 {
-			if err := templ.RenderAttributes(ctx, w, templ.Attributes(e.Attrs)); err != nil {
+			if err := templ.RenderAttributes(ctx, &b, templ.Attributes(e.Attrs)); err != nil {
 				return err
 			}
 		}
+
 		if slices.Contains(VoidElements, e.Tag) {
 			b.WriteString(" />")
 		} else {
@@ -268,7 +264,7 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 	}
 
 	if e.Text != "" {
-		b.WriteString(e.Text)
+		b.WriteString(templ.EscapeString(e.Text))
 	} else {
 		for _, child := range e.Children {
 			if err := child.Render(ctx, &b); err != nil {
