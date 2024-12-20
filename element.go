@@ -20,10 +20,19 @@ type (
 
 var (
 	VoidElements = []string{
+		"area",
+		"base",
 		"br",
+		"col",
+		"embed",
 		"hr",
 		"img",
 		"input",
+		"link",
+		"meta",
+		"source",
+		"track",
+		"wbr",
 	}
 	NA = Attrs{}
 )
@@ -247,6 +256,8 @@ func (e *Element) AddChildren(children ...*Element) {
 func (e *Element) Render(ctx context.Context, w io.Writer) error {
 	var b strings.Builder
 
+	isVoid := slices.Contains(VoidElements, e.Tag)
+
 	if e.Tag != "" {
 		b.WriteString("<" + e.Tag)
 
@@ -256,25 +267,27 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 			}
 		}
 
-		if slices.Contains(VoidElements, e.Tag) {
+		if isVoid {
 			b.WriteString(" />")
 		} else {
 			b.WriteString(">")
 		}
 	}
 
-	if e.Text != "" {
-		b.WriteString(templ.EscapeString(e.Text))
-	} else {
-		for _, child := range e.Children {
-			if err := child.Render(ctx, &b); err != nil {
-				return err
+	if !isVoid {
+		if e.Text != "" {
+			b.WriteString(templ.EscapeString(e.Text))
+		} else {
+			for _, child := range e.Children {
+				if err := child.Render(ctx, &b); err != nil {
+					return err
+				}
 			}
 		}
-	}
 
-	if e.Tag != "" && !slices.Contains(VoidElements, e.Tag) {
-		b.WriteString("</" + e.Tag + ">")
+		if e.Tag != "" {
+			b.WriteString("</" + e.Tag + ">")
+		}
 	}
 
 	_, err := io.WriteString(w, b.String())

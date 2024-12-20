@@ -87,17 +87,26 @@ func TestElementTags(t *testing.T) {
 	}
 }
 
-// Test rendering a self-closing Element.
-func TestRenderSelfClosingElements(t *testing.T) {
+// Test rendering a void Element's.
+func TestRenderVoidElements(t *testing.T) {
 	tests := []struct {
 		name     string
 		nodeFunc func() *Element
 		expected string
 	}{
-		{"Br", func() *Element { return BR(NA) }, "<br />"},
-		{"Img", func() *Element { return Img(NA) }, "<img />"},
-		{"Input", func() *Element { return Input(NA) }, "<input />"},
-		{"Hr", func() *Element { return HR(NA) }, "<hr />"},
+		{"area", func() *Element { return &Element{Tag: "area"} }, "<area />"},
+		{"base", func() *Element { return &Element{Tag: "base"} }, "<base />"},
+		{"br", func() *Element { return &Element{Tag: "br"} }, "<br />"},
+		{"col", func() *Element { return &Element{Tag: "col"} }, "<col />"},
+		{"embed", func() *Element { return &Element{Tag: "embed"} }, "<embed />"},
+		{"hr", func() *Element { return &Element{Tag: "hr"} }, "<hr />"},
+		{"img", func() *Element { return &Element{Tag: "img"} }, "<img />"},
+		{"input", func() *Element { return &Element{Tag: "input"} }, "<input />"},
+		{"link", func() *Element { return &Element{Tag: "link"} }, "<link />"},
+		{"meta", func() *Element { return &Element{Tag: "meta"} }, "<meta />"},
+		{"source", func() *Element { return &Element{Tag: "source"} }, "<source />"},
+		{"track", func() *Element { return &Element{Tag: "track"} }, "<track />"},
+		{"wbr", func() *Element { return &Element{Tag: "wbr"} }, "<wbr />"},
 	}
 
 	for _, tt := range tests {
