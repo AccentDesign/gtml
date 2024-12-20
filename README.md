@@ -23,7 +23,16 @@ field := gtml.Div(
 field.Render(context.Background(), os.Stdout)
 ```
 
-With [templ](https://templ.guide).
+renders:
+```html
+<div>
+    <label for="email">Email</label>
+    <input class="form-input" id="email" placeholder="email@example.com" required type="email" />
+    <p class="help-text">Your email address.</p>
+</div>
+```
+
+Easily include them in [templ](https://templ.guide) components.
 
 ```go
 templ Form() {
