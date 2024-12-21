@@ -9,13 +9,20 @@ import (
 )
 
 type (
-	Attrs   templ.Attributes
-	Element struct {
-		Attrs    Attrs      `json:"attrs"`
-		Children []*Element `json:"children"`
-		Tag      string     `json:"tag"`
-		Text     string     `json:"text"`
+	Attrs       templ.Attributes
+	ContentType int
+	Element     struct {
+		Attrs       Attrs       `json:"attrs"`
+		Children    []*Element  `json:"children"`
+		Tag         string      `json:"tag"`
+		Content     string      `json:"content"`
+		ContentType ContentType `json:"content_type"`
 	}
+)
+
+const (
+	TextContent ContentType = iota
+	RawContent
 )
 
 var (
@@ -185,6 +192,10 @@ func P(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "p", Attrs: attrs, Children: children}
 }
 
+func Raw(html string) *Element {
+	return &Element{Content: html, ContentType: RawContent, Children: []*Element{}}
+}
+
 func Section(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "section", Attrs: attrs, Children: children}
 }
@@ -222,7 +233,7 @@ func TD(attrs Attrs, children ...*Element) *Element {
 }
 
 func Text(text string) *Element {
-	return &Element{Text: text, Children: []*Element{}}
+	return &Element{Content: text, ContentType: TextContent, Children: []*Element{}}
 }
 
 func Textarea(attrs Attrs, children ...*Element) *Element {
@@ -275,8 +286,13 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 	}
 
 	if !isVoid {
-		if e.Text != "" {
-			b.WriteString(templ.EscapeString(e.Text))
+		if e.Content != "" {
+			switch e.ContentType {
+			case TextContent:
+				b.WriteString(templ.EscapeString(e.Content))
+			case RawContent:
+				b.WriteString(e.Content)
+			}
 		} else {
 			for _, child := range e.Children {
 				if err := child.Render(ctx, &b); err != nil {

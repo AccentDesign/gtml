@@ -60,6 +60,7 @@ func TestElementTags(t *testing.T) {
 		{"Option", func() *Element { return Option(NA) }, "option"},
 		{"Optgroup", func() *Element { return Optgroup(NA) }, "optgroup"},
 		{"P", func() *Element { return P(NA) }, "p"},
+		{"Raw", func() *Element { return Raw("<div></div>") }, ""},
 		{"Section", func() *Element { return Section(NA) }, "section"},
 		{"Select", func() *Element { return Select(NA) }, "select"},
 		{"Small", func() *Element { return Small(NA) }, "small"},
@@ -69,6 +70,7 @@ func TestElementTags(t *testing.T) {
 		{"Table", func() *Element { return Table(NA) }, "table"},
 		{"TBody", func() *Element { return TBody(NA) }, "tbody"},
 		{"TD", func() *Element { return TD(NA) }, "td"},
+		{"Text", func() *Element { return Text("some text") }, ""},
 		{"Textarea", func() *Element { return Textarea(NA) }, "textarea"},
 		{"TFoot", func() *Element { return TFoot(NA) }, "tfoot"},
 		{"TH", func() *Element { return TH(NA) }, "th"},
@@ -155,10 +157,21 @@ func TestRenderNestedElements(t *testing.T) {
 	}
 }
 
-// Test rendering an Element with text content but no tag.
+// Test rendering an Element with text content.
 func TestRenderTextElement(t *testing.T) {
-	node := Text("Just text")
-	expected := `Just text`
+	node := Text("Foo & Bar")
+	expected := `Foo &amp; Bar`
+
+	output := renderElement(t, node)
+	if output != expected {
+		t.Errorf("Expected %q, got %q", expected, output)
+	}
+}
+
+// Test rendering an Element with raw content.
+func TestRenderRawElement(t *testing.T) {
+	node := Raw(`<a href="link?foo&bar">a</a>`)
+	expected := `<a href="link?foo&bar">a</a>`
 
 	output := renderElement(t, node)
 	if output != expected {
