@@ -166,6 +166,11 @@ func H5(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "h5", Attrs: attrs, Children: children}
 }
 
+// Head creates a head element <head></head>.
+func Head(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "head", Attrs: attrs, Children: children}
+}
+
 // Header creates a header element <header></header>.
 func Header(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "header", Attrs: attrs, Children: children}
@@ -174,6 +179,11 @@ func Header(attrs Attrs, children ...*Element) *Element {
 // HR creates a horizontal rule element <hr />.
 func HR(attrs Attrs) *Element {
 	return &Element{Tag: "hr", Attrs: attrs, Children: []*Element{}}
+}
+
+// Html creates an html element <html></html>.
+func Html(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "html", Attrs: attrs, Children: children}
 }
 
 // I creates an italic element <i></i>.
@@ -206,9 +216,19 @@ func LI(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "li", Attrs: attrs, Children: children}
 }
 
+// Link creates a link element <link />.
+func Link(attrs Attrs) *Element {
+	return &Element{Tag: "link", Attrs: attrs, Children: []*Element{}}
+}
+
 // Main creates a main element <main></main>.
 func Main(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "main", Attrs: attrs, Children: children}
+}
+
+// Meta creates a meta element <meta />.
+func Meta(attrs Attrs) *Element {
+	return &Element{Tag: "meta", Attrs: attrs, Children: []*Element{}}
 }
 
 // Nav creates a nav element <nav></nav>.
@@ -311,6 +331,11 @@ func TH(attrs Attrs, children ...*Element) *Element {
 // THead creates a table header element <thead></thead>.
 func THead(attrs Attrs, children ...*Element) *Element {
 	return &Element{Tag: "thead", Attrs: attrs, Children: children}
+}
+
+// Title creates a title element <title></title>.
+func Title(attrs Attrs, children ...*Element) *Element {
+	return &Element{Tag: "title", Attrs: attrs, Children: children}
 }
 
 // TR creates a table row element <tr></tr>.
