@@ -1,8 +1,8 @@
 # gtml
 
-No-frills html from golang.
+No-frills html elements in pure golang.
 
-Example:
+### Usage
 
 ```go
 import "github.com/accentdesign/gtml"
@@ -32,7 +32,11 @@ renders:
 </div>
 ```
 
-Easily include them in [templ](https://templ.guide) components.
+### Templ
+
+gtml is designed to work with [templ](https://templ.guide). It implements the `templ.Component` interface.
+
+Easily include them in a `templ.Component`.
 
 ```go
 templ Form() {
@@ -40,4 +44,17 @@ templ Form() {
 		@field
 	</form>
 }
+```
+
+Or include a `templ.Component` in a `gtml.Element` as a child.
+
+```go
+func childTemplate(text string) templ.Component {
+    return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+        _, err := io.WriteString(w, "<p>"+text+"</p>")
+        return err
+    })
+}
+
+gtml.Div(gtml.Attrs{"class": "parent"}, childTemplate("Hello, World!"))
 ```

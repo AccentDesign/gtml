@@ -3,14 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/a-h/templ"
 	"github.com/accentdesign/gtml"
 	"os"
 	"time"
 )
 
-func page(title string, content ...*gtml.Element) *gtml.Element {
+func page(title string, content ...templ.Component) *gtml.Element {
 	return &gtml.Element{
-		Children: []*gtml.Element{
+		Children: []templ.Component{
 			gtml.Raw("<!DOCTYPE html>"),
 			gtml.Html(
 				gtml.Attrs{"lang": "en"},

@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/a-h/templ"
 	"github.com/accentdesign/gtml"
 	"os"
 	"time"
 )
 
-func icon(children ...*gtml.Element) *gtml.Element {
+func icon(children ...templ.Component) *gtml.Element {
 	return &gtml.Element{
 		Tag: "svg",
 		Attrs: gtml.Attrs{

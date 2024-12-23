@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/a-h/templ"
 	"github.com/accentdesign/gtml"
 	"os"
 	"time"
 )
 
-func field(controls ...*gtml.Element) *gtml.Element {
+func field(controls ...templ.Component) *gtml.Element {
 	return gtml.Div(gtml.Attrs{"class": "space-y-2"}, controls...)
 }
 
@@ -28,7 +29,7 @@ func textarea(id, label, placeholder, help string, required bool) *gtml.Element 
 	)
 }
 
-func dropdown(id, label, help string, required bool, options []*gtml.Element) *gtml.Element {
+func dropdown(id, label, help string, required bool, options []templ.Component) *gtml.Element {
 	return field(
 		gtml.Label(gtml.Attrs{"class": "text-sm font-medium leading-none", "for": id}, gtml.Text(label)),
 		gtml.Select(gtml.Attrs{"class": "flex w-full rounded-md border px-3 py-2 text-sm", "id": id, "required": required}, options...),
@@ -36,7 +37,7 @@ func dropdown(id, label, help string, required bool, options []*gtml.Element) *g
 	)
 }
 
-var sexOptions = []*gtml.Element{
+var sexOptions = []templ.Component{
 	gtml.Option(gtml.Attrs{"value": ""}, gtml.Text("Please Select...")),
 	gtml.Option(gtml.Attrs{"value": "male"}, gtml.Text("Male")),
 	gtml.Option(gtml.Attrs{"value": "female"}, gtml.Text("Female")),
