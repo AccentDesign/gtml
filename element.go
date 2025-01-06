@@ -131,6 +131,11 @@ func DT(attrs Attrs, children ...templ.Component) *Element {
 	return &Element{Tag: "dt", Attrs: attrs, Children: children}
 }
 
+// Empty creates an empty element.
+func Empty() *Element {
+	return &Element{}
+}
+
 // Fieldset creates a fieldset element <fieldset></fieldset>.
 func Fieldset(attrs Attrs, children ...templ.Component) *Element {
 	return &Element{Tag: "fieldset", Attrs: attrs, Children: children}

@@ -39,6 +39,7 @@ func TestElementTags(t *testing.T) {
 		{"Div", func() *Element { return Div(NA) }, "div"},
 		{"DL", func() *Element { return DL(NA) }, "dl"},
 		{"DT", func() *Element { return DT(NA) }, "dt"},
+		{"Empty", func() *Element { return Empty() }, ""},
 		{"Fieldset", func() *Element { return Fieldset(NA) }, "fieldset"},
 		{"Form", func() *Element { return Form(NA) }, "form"},
 		{"H1", func() *Element { return H1(NA) }, "h1"},
@@ -197,7 +198,7 @@ func TestRenderElementWithAttributes(t *testing.T) {
 
 // Test rendering empty Element (no tag, no attributes, no children).
 func TestRenderEmptyElement(t *testing.T) {
-	node := &Element{}
+	node := Empty()
 	expected := ``
 
 	output := renderElement(t, node)
