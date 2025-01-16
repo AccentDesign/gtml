@@ -1,3 +1,7 @@
+[![Test](https://github.com/AccentDesign/gtml/actions/workflows/test.yml/badge.svg)](https://github.com/AccentDesign/gtml/actions/workflows/test.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/accentdesign/gtml)](https://goreportcard.com/report/github.com/accentdesign/gtml)
+<a href="https://pkg.go.dev/github.com/accentdesign/gtml"><img src="https://img.shields.io/badge/Documentation%20on-pkg.go.dev-blue.svg"/></a>
+
 # gtml
 
 No-frills html elements in pure golang.
