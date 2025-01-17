@@ -218,3 +218,16 @@ func TestRenderElementAddChildren(t *testing.T) {
 		t.Errorf("Expected %q, got %q", expected, output)
 	}
 }
+
+// BenchmarkRender benchmarks the Render method of the Element struct.
+func BenchmarkRender(b *testing.B) {
+	node := Div(Attrs{"class": "example"}, Text("Hello, World!"))
+
+	for i := 0; i < b.N; i++ {
+		var buf bytes.Buffer
+		err := node.Render(context.Background(), &buf)
+		if err != nil {
+			b.Fatalf("Render failed: %v", err)
+		}
+	}
+}
