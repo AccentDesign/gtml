@@ -31,7 +31,7 @@ renders:
 ```html
 <div>
     <label for="email">Email</label>
-    <input class="form-input" id="email" placeholder="email@example.com" required type="email" />
+    <input class="form-input" id="email" placeholder="email@example.com" required type="email">
     <p class="help-text">Your email address.</p>
 </div>
 ```
