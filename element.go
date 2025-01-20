@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/a-h/templ"
 	"io"
-	"slices"
 )
 
 type (
@@ -30,21 +29,21 @@ const (
 )
 
 var (
-	// VoidElements is a list of HTML void elements, these are all self-closing.
-	VoidElements = []string{
-		"area",
-		"base",
-		"br",
-		"col",
-		"embed",
-		"hr",
-		"img",
-		"input",
-		"link",
-		"meta",
-		"source",
-		"track",
-		"wbr",
+	// VoidElements is a list of HTML void elements, these don't have children or content.
+	VoidElements = map[string]string{
+		"area":   ">",
+		"base":   ">",
+		"br":     ">",
+		"col":    ">",
+		"embed":  ">",
+		"hr":     ">",
+		"img":    ">",
+		"input":  ">",
+		"link":   ">",
+		"meta":   ">",
+		"source": ">",
+		"track":  ">",
+		"wbr":    ">",
 	}
 	// NA is an empty set of attributes.
 	NA = Attrs{}
@@ -359,7 +358,11 @@ func (e *Element) AddChildren(children ...templ.Component) {
 
 // Render renders the Element to the writer.
 func (e *Element) Render(ctx context.Context, w io.Writer) error {
-	isVoid := slices.Contains(VoidElements, e.Tag)
+	closer := ">"
+	voidCloser, isVoid := VoidElements[e.Tag]
+	if isVoid {
+		closer = voidCloser
+	}
 
 	if e.Tag != "" {
 		if _, err := io.WriteString(w, "<"+e.Tag); err != nil {
@@ -370,15 +373,8 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 				return err
 			}
 		}
-
-		if isVoid {
-			if _, err := io.WriteString(w, " />"); err != nil {
-				return err
-			}
-		} else {
-			if _, err := io.WriteString(w, ">"); err != nil {
-				return err
-			}
+		if _, err := io.WriteString(w, closer); err != nil {
+			return err
 		}
 	}
 

@@ -97,24 +97,25 @@ func TestElementTags(t *testing.T) {
 
 // Test rendering a void Element's.
 func TestRenderVoidElements(t *testing.T) {
+	attr := Attrs{"foo": "bar"}
 	tests := []struct {
 		name     string
 		nodeFunc func() *Element
 		expected string
 	}{
-		{"area", func() *Element { return &Element{Tag: "area"} }, "<area />"},
-		{"base", func() *Element { return &Element{Tag: "base"} }, "<base />"},
-		{"br", func() *Element { return &Element{Tag: "br"} }, "<br />"},
-		{"col", func() *Element { return &Element{Tag: "col"} }, "<col />"},
-		{"embed", func() *Element { return &Element{Tag: "embed"} }, "<embed />"},
-		{"hr", func() *Element { return &Element{Tag: "hr"} }, "<hr />"},
-		{"img", func() *Element { return &Element{Tag: "img"} }, "<img />"},
-		{"input", func() *Element { return &Element{Tag: "input"} }, "<input />"},
-		{"link", func() *Element { return &Element{Tag: "link"} }, "<link />"},
-		{"meta", func() *Element { return &Element{Tag: "meta"} }, "<meta />"},
-		{"source", func() *Element { return &Element{Tag: "source"} }, "<source />"},
-		{"track", func() *Element { return &Element{Tag: "track"} }, "<track />"},
-		{"wbr", func() *Element { return &Element{Tag: "wbr"} }, "<wbr />"},
+		{"area", func() *Element { return &Element{Tag: "area", Attrs: attr} }, `<area foo="bar">`},
+		{"base", func() *Element { return &Element{Tag: "base", Attrs: attr} }, `<base foo="bar">`},
+		{"br", func() *Element { return &Element{Tag: "br"} }, `<br>`},
+		{"col", func() *Element { return &Element{Tag: "col", Attrs: attr} }, `<col foo="bar">`},
+		{"embed", func() *Element { return &Element{Tag: "embed", Attrs: attr} }, `<embed foo="bar">`},
+		{"hr", func() *Element { return &Element{Tag: "hr"} }, `<hr>`},
+		{"img", func() *Element { return &Element{Tag: "img", Attrs: attr} }, `<img foo="bar">`},
+		{"input", func() *Element { return &Element{Tag: "input", Attrs: attr} }, `<input foo="bar">`},
+		{"link", func() *Element { return &Element{Tag: "link", Attrs: attr} }, `<link foo="bar">`},
+		{"meta", func() *Element { return &Element{Tag: "meta", Attrs: attr} }, `<meta foo="bar">`},
+		{"source", func() *Element { return &Element{Tag: "source", Attrs: attr} }, `<source foo="bar">`},
+		{"track", func() *Element { return &Element{Tag: "track", Attrs: attr} }, `<track foo="bar">`},
+		{"wbr", func() *Element { return &Element{Tag: "wbr", Attrs: attr} }, `<wbr foo="bar">`},
 	}
 
 	for _, tt := range tests {
@@ -142,7 +143,7 @@ func TestRenderBasicElement(t *testing.T) {
 // Test rendering an image tag with attributes.
 func TestRenderImgElement(t *testing.T) {
 	node := Img(Attrs{"src": "image.png", "alt": "Test Image"})
-	expected := `<img alt="Test Image" src="image.png" />`
+	expected := `<img alt="Test Image" src="image.png">`
 
 	output := renderElement(t, node)
 	if output != expected {
