@@ -5,7 +5,6 @@ import (
 	"github.com/a-h/templ"
 	"io"
 	"slices"
-	"strings"
 )
 
 type (
@@ -360,23 +359,26 @@ func (e *Element) AddChildren(children ...templ.Component) {
 
 // Render renders the Element to the writer.
 func (e *Element) Render(ctx context.Context, w io.Writer) error {
-	var b strings.Builder
-
 	isVoid := slices.Contains(VoidElements, e.Tag)
 
 	if e.Tag != "" {
-		b.WriteString("<" + e.Tag)
-
+		if _, err := io.WriteString(w, "<"+e.Tag); err != nil {
+			return err
+		}
 		if len(e.Attrs) > 0 {
-			if err := templ.RenderAttributes(ctx, &b, templ.Attributes(e.Attrs)); err != nil {
+			if err := templ.RenderAttributes(ctx, w, templ.Attributes(e.Attrs)); err != nil {
 				return err
 			}
 		}
 
 		if isVoid {
-			b.WriteString(" />")
+			if _, err := io.WriteString(w, " />"); err != nil {
+				return err
+			}
 		} else {
-			b.WriteString(">")
+			if _, err := io.WriteString(w, ">"); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -384,23 +386,28 @@ func (e *Element) Render(ctx context.Context, w io.Writer) error {
 		if e.Content != "" {
 			switch e.ContentType {
 			case TextContent:
-				b.WriteString(templ.EscapeString(e.Content))
+				if _, err := io.WriteString(w, templ.EscapeString(e.Content)); err != nil {
+					return err
+				}
 			case RawContent:
-				b.WriteString(e.Content)
+				if _, err := io.WriteString(w, e.Content); err != nil {
+					return err
+				}
 			}
 		} else {
 			for _, child := range e.Children {
-				if err := child.Render(ctx, &b); err != nil {
+				if err := child.Render(ctx, w); err != nil {
 					return err
 				}
 			}
 		}
 
 		if e.Tag != "" {
-			b.WriteString("</" + e.Tag + ">")
+			if _, err := io.WriteString(w, "</"+e.Tag+">"); err != nil {
+				return err
+			}
 		}
 	}
 
-	_, err := io.WriteString(w, b.String())
-	return err
+	return nil
 }
