@@ -208,6 +208,21 @@ func TestRenderEmptyElement(t *testing.T) {
 	}
 }
 
+// Test rendering a Fragment of elements.
+func TestRenderFragment(t *testing.T) {
+	node := Fragment(
+		Div(NA, Text("1")),
+		Div(NA, Text("2")),
+		Div(NA, Text("3")),
+	)
+	expected := `<div>1</div><div>2</div><div>3</div>`
+
+	output := renderElement(t, node)
+	if output != expected {
+		t.Errorf("Expected %q, got %q", expected, output)
+	}
+}
+
 // Test adding children to an Element
 func TestRenderElementAddChildren(t *testing.T) {
 	node := UL(NA, LI(NA, Text("1")))

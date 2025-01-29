@@ -144,6 +144,11 @@ func Form(attrs Attrs, children ...templ.Component) *Element {
 	return &Element{Tag: "form", Attrs: attrs, Children: children}
 }
 
+// Fragment allows you to create a fragment of elements without a parent element.
+func Fragment(children ...templ.Component) *Element {
+	return &Element{Children: children}
+}
+
 // H1 creates a heading level 1 element <h1></h1>.
 func H1(attrs Attrs, children ...templ.Component) *Element {
 	return &Element{Tag: "h1", Attrs: attrs, Children: children}
