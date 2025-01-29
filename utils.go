@@ -31,8 +31,8 @@ func Map[T any](items []T, transform func(item T) templ.Component) []templ.Compo
 
 // Range function that generates a sequence of numbers and renders elements based on those numbers.
 func Range(start, end int, transform func(i int) templ.Component) []templ.Component {
-	elements := make([]templ.Component, end-start)
-	for i := start; i < end; i++ {
+	elements := make([]templ.Component, end-start+1)
+	for i := start; i <= end; i++ {
 		elements[i-start] = transform(i)
 	}
 	return elements

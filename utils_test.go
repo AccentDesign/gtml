@@ -77,7 +77,7 @@ func TestRangeFunction(t *testing.T) {
 
 	node := UL(NA, Range(1, 4, transform)...)
 	output := renderElement(t, node)
-	expected := `<ul><li>1</li><li>2</li><li>3</li></ul>`
+	expected := `<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>`
 
 	if output != expected {
 		t.Errorf("Expected %q, got %q", expected, output)
