@@ -1,6 +1,8 @@
 package gtml
 
-import "github.com/a-h/templ"
+import (
+	"github.com/a-h/templ"
+)
 
 // If returns the element if the condition is true, otherwise returns an empty element.
 func If(condition bool, element *Element) *Element {
@@ -19,7 +21,7 @@ func IfElse(condition bool, truthyElement, falsyElement *Element) *Element {
 }
 
 // Map function that applies a transformation function to a list of items and returns the resulting elements.
-func Map(items []interface{}, transform func(item interface{}) templ.Component) []templ.Component {
+func Map[T any](items []T, transform func(item T) templ.Component) []templ.Component {
 	elements := make([]templ.Component, len(items))
 	for i, item := range items {
 		elements[i] = transform(item)

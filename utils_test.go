@@ -55,12 +55,12 @@ func TestIfElseFunction(t *testing.T) {
 
 // Test the Map function with a list of items.
 func TestMapFunction(t *testing.T) {
-	items := []interface{}{"One", "Two", "Three"}
-	transform := func(item interface{}) templ.Component {
-		return LI(NA, Text(item.(string)))
+	items := []string{"One", "Two", "Three"}
+	transform := func(item string) templ.Component {
+		return LI(NA, Text(item))
 	}
 
-	node := UL(NA, Map(items, transform)...)
+	node := UL(NA, Map[string](items, transform)...)
 	output := renderElement(t, node)
 	expected := `<ul><li>One</li><li>Two</li><li>Three</li></ul>`
 
