@@ -3,11 +3,12 @@ package gtml
 import (
 	"bytes"
 	"context"
+	"github.com/a-h/templ"
 	"testing"
 )
 
 // Helper function to simplify rendering a Element and capturing the output.
-func renderElement(t *testing.T, node *Element) string {
+func renderElement(t *testing.T, node templ.Component) string {
 	var buf bytes.Buffer
 	err := node.Render(context.Background(), &buf)
 	if err != nil {

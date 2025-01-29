@@ -5,7 +5,7 @@ import (
 )
 
 // If returns the element if the condition is true, otherwise returns an empty element.
-func If(condition bool, element *Element) *Element {
+func If(condition bool, element templ.Component) templ.Component {
 	if condition {
 		return element
 	}
@@ -13,7 +13,7 @@ func If(condition bool, element *Element) *Element {
 }
 
 // IfElse returns the truthy element if the condition is true, otherwise returns the falsy element.
-func IfElse(condition bool, truthyElement, falsyElement *Element) *Element {
+func IfElse(condition bool, truthyElement, falsyElement templ.Component) templ.Component {
 	if condition {
 		return truthyElement
 	}
