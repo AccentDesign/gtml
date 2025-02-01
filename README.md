@@ -36,6 +36,32 @@ renders:
 </div>
 ```
 
+### Functional Attributes
+
+There is a slight overhead to this approach, it's down to personal taste.
+
+```go
+import (
+    "github.com/accentdesign/gtml"
+    "github.com/accentdesign/gtml/attrs"
+)
+
+field = gtml.Div(
+    gtml.NA,
+    gtml.Label(attrs.For("email"), gtml.Text("Email")),
+    gtml.Input(attrs.Merge(
+        attrs.Class("form-input"),
+        attrs.ID("email"),
+        attrs.Placeholder("email@example.com"),
+        attrs.Required(true),
+        attrs.Type("email"),
+    )),
+    gtml.P(attrs.Class("help-text"), gtml.Text("Your email address.")),
+)
+
+field.Render(context.Background(), os.Stdout)
+```
+
 ### Templ
 
 gtml is designed to work with [templ](https://templ.guide). It implements the `templ.Component` interface.
