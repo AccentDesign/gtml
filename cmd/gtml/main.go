@@ -174,7 +174,7 @@ var tagFuncMap = map[string]string{
 	"head":       "Head",
 	"header":     "Header",
 	"hr":         "HR",
-	"html":       "HTML",
+	"html":       "Html",
 	"i":          "I",
 	"img":        "Img",
 	"input":      "Input",
