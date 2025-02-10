@@ -62,3 +62,17 @@ func childTemplate(text string) templ.Component {
 
 gtml.Div(gtml.Attrs{"class": "parent"}, childTemplate("Hello, World!"))
 ```
+
+### CLI
+
+gtml also comes with a CLI tool to generate go from an html file.
+
+install:
+```sh
+go install github.com/accentdesign/gtml/cmd/gtml@latest
+```
+
+usage:
+```sh
+gtml < input.html > output.go
+```
