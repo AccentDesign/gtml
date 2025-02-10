@@ -24,6 +24,7 @@ func TestElementTags(t *testing.T) {
 		nodeFunc func() *Element
 		expected string
 	}{
+		{"New", func() *Element { return New("custom", NA) }, "custom"},
 		{"A", func() *Element { return A(NA) }, "a"},
 		{"Address", func() *Element { return Address(NA) }, "address"},
 		{"Article", func() *Element { return Article(NA) }, "article"},
@@ -229,6 +230,17 @@ func TestRenderElementAddChildren(t *testing.T) {
 	node := UL(NA, LI(NA, Text("1")))
 	node.AddChildren(LI(NA, Text("2")), LI(NA, Text("3")))
 	expected := `<ul><li>1</li><li>2</li><li>3</li></ul>`
+
+	output := renderElement(t, node)
+	if output != expected {
+		t.Errorf("Expected %q, got %q", expected, output)
+	}
+}
+
+// Test rendering a custom Element with a tag and text content.
+func TestRenderNewElement(t *testing.T) {
+	node := New("custom", Attrs{"class": "example"}, Text("Hello, World!"))
+	expected := `<custom class="example">Hello, World!</custom>`
 
 	output := renderElement(t, node)
 	if output != expected {
