@@ -72,7 +72,17 @@ install:
 go install github.com/accentdesign/gtml/cmd/gtml@latest
 ```
 
-usage:
+usage
 ```sh
-gtml < input.html > output.go
+gtml -help
+```
+
+generate go from html to file:
+```sh
+gtml generate < input.html > output.go
+```
+
+generate go from html to stdout:
+```sh
+gtml generate < input.html
 ```

@@ -1,4 +1,4 @@
-package main
+package generate
 
 import (
 	"embed"
@@ -28,7 +28,7 @@ func TestStart(t *testing.T) {
 
 			r := strings.NewReader(in)
 			var w strings.Builder
-			err := start(newLogger(t), r, &w)
+			err := Run(newLogger(t), r, &w)
 
 			if err != nil {
 				t.Error(err)
