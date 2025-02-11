@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/accentdesign/gtml"
 	"github.com/accentdesign/gtml/cmd/gtml/generate"
 	"io"
 	"log/slog"
@@ -24,6 +25,7 @@ See https://github.com/accentdesign/gtml for more information.
 
 commands:
   generate   Generates Go code from an html file
+  version    Print the version
   help       Print this help message
 
 `
@@ -36,6 +38,9 @@ func run(stdin io.Reader, stdout, stderr io.Writer, args []string) (code int) {
 	switch args[1] {
 	case "generate":
 		return generateCmd(stdin, stdout, stderr, args[2:])
+	case "version":
+		fmt.Fprintln(stdout, gtml.Version())
+		return 0
 	case "help", "-help", "--help", "-h":
 		fmt.Fprint(stdout, usageText)
 		return 0
